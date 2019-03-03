@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Hole.png-ca46cff84e7976930078a1b214ba3d03.stex"
+path="res://.import/MainMenu.png-e9afa77a3e6b08b9e865b46a1d86d349.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ArtAssets/Hole.png"
-dest_files=[ "res://.import/Hole.png-ca46cff84e7976930078a1b214ba3d03.stex" ]
+source_file="res://ArtAssets/MainMenu.png"
+dest_files=[ "res://.import/MainMenu.png-e9afa77a3e6b08b9e865b46a1d86d349.stex" ]
 
 [params]
 

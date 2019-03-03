@@ -6,13 +6,24 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=3
+config_version=4
+
+_global_script_classes=[  ]
+_global_script_class_icons={
+
+}
+
+[android]
+
+modules="org/godotengine/godot/FireBase,org/godotengine/godot/SQLBridge"
 
 [application]
 
 config/name="GyroRun"
-run/main_scene="res://BallRoll.tscn"
-config/icon="res://icon.png"
+run/main_scene="res://MainMenu.tscn"
+boot_splash/image="res://ArtAssets/GyroRun Logo.png"
+boot_splash/bg_color=Color( 1, 1, 1, 1 )
+config/icon="res://ArtAssets/GyroRun Logo.png"
 
 [display]
 
