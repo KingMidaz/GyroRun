@@ -22,6 +22,15 @@ func _process(delta):
 		old_obstacle_scene = new_obstacle_scene
 		new_obstacle_scene = obstacle_scene.instance()
 		get_node("Obstacle_Page_Parent").add_child(new_obstacle_scene)
+		
+		get_node("Ball").controls_reversed = new_obstacle_scene.controls_reversed
+		
+		if not new_obstacle_scene.controls_reversed == old_obstacle_scene.controls_reversed:
+			print("GyroRun : Playing text animation")
+			if new_obstacle_scene.controls_reversed:
+				get_node("Reversed_Notification_Point/Text_AnimationPlayer").play("2D_Text_Anim")
+			else:
+				get_node("Reversed_Notification_Point/Text_AnimationPlayer").play_backwards("2D_Text_Anim")
 
 func _on_round_ended():
 	print("GyroRun: Ending round")

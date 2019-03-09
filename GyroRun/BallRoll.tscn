@@ -1,135 +1,149 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://ArtAssets/Table.png" type="Texture" id=1]
-[ext_resource path="res://RigidBody2D.gd" type="Script" id=2]
-[ext_resource path="res://ArtAssets/Ball.png" type="Texture" id=3]
-[ext_resource path="res://BallFailArea.gd" type="Script" id=4]
+[ext_resource path="res://Ball_Level.gd" type="Script" id=2]
+[ext_resource path="res://Ball.gd" type="Script" id=3]
+[ext_resource path="res://ArtAssets/Ball.png" type="Texture" id=4]
+[ext_resource path="res://BallFailArea.gd" type="Script" id=5]
+[ext_resource path="res://Gobold Bold.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://ArtAssets/Reversed_Text.png" type="Texture" id=7]
 
 [sub_resource type="CircleShape2D" id=1]
-
-custom_solver_bias = 0.0
 radius = 115.232
-_sections_unfolded = [ "Resource" ]
 
 [sub_resource type="CircleShape2D" id=2]
 
-custom_solver_bias = 0.0
-radius = 10.0
-
 [sub_resource type="RectangleShape2D" id=3]
-
-custom_solver_bias = 0.0
 extents = Vector2( 11.1916, 20.9859 )
 
 [sub_resource type="RectangleShape2D" id=4]
-
-custom_solver_bias = 0.0
 extents = Vector2( 10.5698, 10 )
 
-[node name="Table" type="Sprite" index="0"]
+[sub_resource type="DynamicFont" id=5]
+size = 80
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 6 )
 
+[sub_resource type="Animation" id=6]
+resource_name = "2D_Text_Anim"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Text:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Text:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ false, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Text:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.4, 1.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+
+[node name="Table" type="Sprite"]
 texture = ExtResource( 1 )
 centered = false
-_sections_unfolded = [ "Offset", "Transform" ]
-
-[node name="RigidBody2D" type="RigidBody2D" parent="." index="0"]
-
-position = Vector2( 566.102, 2115.45 )
-scale = Vector2( 1, 1 )
-input_pickable = false
-collision_layer = 1
-collision_mask = 1
-mode = 0
-mass = 1.0
-friction = 1.0
-bounce = 0.0
-gravity_scale = 0.0
-custom_integrator = false
-continuous_cd = 0
-contacts_reported = 0
-contact_monitor = false
-sleeping = false
-can_sleep = true
-linear_velocity = Vector2( 0, 0 )
-linear_damp = -1.0
-angular_velocity = 0.0
-angular_damp = -1.0
-applied_torque = 1000.0
 script = ExtResource( 2 )
-_sections_unfolded = [ "Angular", "Applied Forces" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" index="0"]
+[node name="Ball" type="RigidBody2D" parent="."]
+position = Vector2( 563, 2115.45 )
+z_index = 10
+gravity_scale = 0.0
+applied_torque = 1000.0
+script = ExtResource( 3 )
 
+[node name="Ball_Coll" type="CollisionShape2D" parent="Ball"]
 position = Vector2( 2.62387, -2.25598 )
 scale = Vector2( 0.852897, 0.861314 )
 shape = SubResource( 1 )
-_sections_unfolded = [ "Transform", "Z Index" ]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Ball_Coll" type="Sprite" parent="RigidBody2D" index="1"]
-
+[node name="Ball_Sprite" type="Sprite" parent="Ball"]
 scale = Vector2( 0.35, 0.35 )
-texture = ExtResource( 3 )
-_sections_unfolded = [ "Offset", "Transform", "Z Index" ]
+texture = ExtResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Area2D" type="Area2D" parent="RigidBody2D" index="2"]
+[node name="Ball_Fail" type="Area2D" parent="Ball"]
+script = ExtResource( 5 )
 
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-audio_bus_override = false
-audio_bus_name = "Master"
-script = ExtResource( 4 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D/Area2D" index="0"]
-
+[node name="Ball_Fail_Coll" type="CollisionShape2D" parent="Ball/Ball_Fail"]
 position = Vector2( 3.24219, 3.78271 )
 scale = Vector2( 2, 2 )
 shape = SubResource( 2 )
-_sections_unfolded = [ "Transform" ]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Area2D" type="Area2D" parent="." index="1"]
+[node name="Area2D" type="Area2D" parent="."]
 
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-audio_bus_override = false
-audio_bus_name = "Master"
-
-[node name="RightEdge" type="CollisionShape2D" parent="Area2D" index="0"]
-
-position = Vector2( 1156.29, 1468.09 )
+[node name="RightEdge" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 1205.5, 1459.89 )
 scale = Vector2( 7.25136, 106.383 )
 shape = SubResource( 3 )
 
-[node name="LeftEdge" type="CollisionShape2D" parent="Area2D" index="1"]
-
-position = Vector2( -29.5518, 1369.98 )
+[node name="LeftEdge" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( -80.8154, 1376.13 )
 scale = Vector2( 7.25136, 106.383 )
 shape = SubResource( 3 )
 
-[node name="TopEdge" type="CollisionShape2D" parent="Area2D" index="2"]
-
+[node name="TopEdge" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 535.037, -139.402 )
 scale = Vector2( 70.2741, 13.871 )
 shape = SubResource( 4 )
 
-[node name="BottomEdge" type="CollisionShape2D" parent="Area2D" index="3"]
-
+[node name="BottomEdge" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 552.197, 2571.89 )
 scale = Vector2( 70.2741, 13.871 )
 shape = SubResource( 4 )
 
+[node name="Score" type="Label" parent="."]
+margin_left = 100.0
+margin_top = 50.0
+margin_right = 502.0
+margin_bottom = 243.0
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 
+[node name="Obstacle_Page_Parent" type="Node2D" parent="."]
+position = Vector2( 0, -2436 )
+
+[node name="Reversed_Notification_Point" type="Node2D" parent="."]
+position = Vector2( 563, 2238.16 )
+
+[node name="Text_AnimationPlayer" type="AnimationPlayer" parent="Reversed_Notification_Point"]
+anims/2D_Text_Anim = SubResource( 6 )
+
+[node name="Text" type="Sprite" parent="Reversed_Notification_Point"]
+rotation = 6.28319
+scale = Vector2( 1e-05, 1e-05 )
+texture = ExtResource( 7 )
+
+[connection signal="round_ended" from="Ball/Ball_Fail" to="." method="_on_round_ended"]

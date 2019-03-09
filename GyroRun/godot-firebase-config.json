@@ -1,5 +1,5 @@
 {
-	"AdMob" : false,
+	"AdMob" : true,
 	"Authentication" : false,
 	"Invites" : false,
 	"RemoteConfig" : false,
@@ -18,16 +18,16 @@
 	"Ads" : 
 	{
 		"AppId": "ca-app-pub-7725717548966861~4560971399",
-		"BannerAd" : false,
+		"BannerAd" : true,
 		"BannerGravity" : "BOTTOM",
-		"BannerAdId" : "",
+		"BannerAdId" : "ca-app-pub-3940256099942544/6300978111",
 
-		"InterstitialAd" : false,
-		"InterstitialAdId" : "",
+		"InterstitialAd" : true,
+		"InterstitialAdId" : "ca-app-pub-3940256099942544/1033173712",
 
 		"RewardedVideoAd" : false,
 		"RewardedVideoAdId" : "",
 
-        "TestAds" : false
+        "TestAds" : true
 	}
 }

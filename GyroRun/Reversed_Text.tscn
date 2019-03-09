@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ArtAssets/Reversed_Text.png" type="Texture" id=1]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Text_Revolve"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimationPlayer/Text:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.5, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 180, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimationPlayer/Text:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 1, 1, 1 ), Vector3( 1, 1, 1 ), Vector3( 0, 0, 0 ) ]
+}
+
+[node name="Spatial" type="Spatial"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Text_Revolve = SubResource( 1 )
+
+[node name="Text" type="Sprite3D" parent="AnimationPlayer"]
+transform = Transform( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
+texture = ExtResource( 1 )
+

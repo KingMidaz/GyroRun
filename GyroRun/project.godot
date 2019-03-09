@@ -20,10 +20,14 @@ modules="org/godotengine/godot/FireBase,org/godotengine/godot/SQLBridge"
 [application]
 
 config/name="GyroRun"
-run/main_scene="res://MainMenu.tscn"
-boot_splash/image="res://ArtAssets/GyroRun Logo.png"
+run/main_scene="res://MainMenu/MainMenu.tscn"
+boot_splash/image="res://ArtAssets/MainMenu.png"
 boot_splash/bg_color=Color( 1, 1, 1, 1 )
 config/icon="res://ArtAssets/GyroRun Logo.png"
+
+[autoload]
+
+global="*res://global.gd"
 
 [display]
 

@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Plank.gd" type="Script" id=1]
+[ext_resource path="res://ArtAssets/Plank.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 24.8712, 59.7974 )
+
+[node name="Plank" type="StaticBody2D"]
+script = ExtResource( 1 )
+
+[node name="Plank_Coll" type="CollisionShape2D" parent="."]
+scale = Vector2( 9.55, 1 )
+shape = SubResource( 1 )
+
+[node name="Plank_Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.6, 1 )
+texture = ExtResource( 2 )
+
+[node name="Plank_Overlap_Area" type="Area2D" parent="."]
+
+[node name="Plank_Overlap_Shape" type="CollisionShape2D" parent="Plank_Overlap_Area"]
+scale = Vector2( 9.55, 1 )
+shape = SubResource( 1 )
+
