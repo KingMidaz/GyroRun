@@ -13,12 +13,19 @@ var load_data = load_play_data("user://play.data")
 
 var window_size = OS.get_window_size()
 
+var ball_speed = 50
+var max_obstacles = 6
+var min_obstacles = 3
+
 func _ready():
 	print("GyroRun: Let's Play!")
 	if OS.get_name() == "Android":
 		global.firebase.initWithFile("res://godot-firebase-config.json", get_instance_id())
-	pass
 
+	if load_data == null:
+		load_data = {"Scores" : []}
+	print("GyroRun: Data loaded " + String(load_data))
+		
 func _process(delta):
 	if (time_to_next_ad > 0):
 		time_to_next_ad = time_to_next_ad - delta
@@ -53,6 +60,7 @@ func _receive_message(tag, from, key, data):
             interstitial_loaded = data == "loaded"
 
 func save_play_data(path, data):
+    print("GyroRun: Data saving " + String(data))
     var f = File.new()
     f.open(path, File.WRITE)
     f.store_var(data)
@@ -66,3 +74,20 @@ func load_play_data(path):
         f.close()
         return data
     return null
+
+func score_is_high(score):
+	var low = score
+	for score in load_data["Scores"]:
+		low = min(float(low), float(score["Score"]))
+	if low == score:
+		return false
+	else:
+		for i in range(load_data["Scores"].size()):
+			if load_data["Scores"][i] == low:
+				load_data["Scores"].remove(i)
+				return true
+		return true
+	
+func add_high_score(score, name):
+	load_data["Scores"].push_back({"Name" : name, "Score" : score})
+	save_play_data("user://play.data", load_data)

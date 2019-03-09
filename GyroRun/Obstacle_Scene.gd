@@ -41,13 +41,12 @@ func _ready():
 						
 						get_node("Obstacle_Point").add_child(plank_instance)
 						
-						var offset = Vector2(randi()%int(window_size.x), randi()%int(window_size.y))
-						plank_instance.global_translate(offset)
+						var offset = Vector2(randi()%int(window_size.x), -randi()%int(window_size.y))
+						plank_instance.global_position = offset
 						print("GyroRun: " + String(offset))
-						while(plank_instance.get_node("Plank_Overlap_Area").get_overlapping_areas().size() > 0
-								and not overcrowded(offset)):
-							offset = Vector2(randi()%int(window_size.x), randi()%int(window_size.y))
-							plank_instance.global_translate(offset)
+						while(plank_instance.get_node("Plank_Overlap_Area").get_overlapping_areas().size() > 0 or overcrowded(offset)):
+							offset = Vector2(randi()%int(window_size.x), -randi()%int(window_size.y))
+							plank_instance.global_position = offset
 						
 						obstacles.push_back(plank_instance)
 					1:
@@ -56,12 +55,12 @@ func _ready():
 						
 						get_node("Obstacle_Point").add_child(hole_instance)
 						
-						var offset = Vector2(randi()%int(window_size.x), randi()%int(window_size.y))
-						hole_instance.global_translate(offset)
+						var offset = Vector2(randi()%int(window_size.x), -randi()%int(window_size.y))
+						hole_instance.global_position = offset
 						print("GyroRun: " + String(offset))
-						while(hole_instance.get_overlapping_areas().size() > 0 and not overcrowded(offset)):
-							offset = Vector2(randi()%int(window_size.x), randi()%int(window_size.y))
-							hole_instance.global_translate(offset)
+						while(hole_instance.get_overlapping_areas().size() > 0 or overcrowded(offset)):
+							offset = Vector2(randi()%int(window_size.x), -randi()%int(window_size.y))
+							hole_instance.global_position = offset
 						
 						obstacles.push_back(hole_instance)
 		1:
@@ -73,13 +72,12 @@ func _ready():
 					
 				get_node("Obstacle_Point").add_child(spinner_instance)
 					
-				var offset = Vector2(randi()%int(window_size.x), randi()%int(window_size.y))
-				spinner_instance.global_translate(offset)
+				var offset = Vector2(randi()%int(window_size.x), -randi()%int(window_size.y))
+				spinner_instance.global_position = offset
 				print("GyroRun: " + String(offset))
-				while(spinner_instance.get_node("Spinner_Overlap_Area").get_overlapping_areas().size() > 0
-					and not overcrowded(offset)):
-					offset = Vector2(randi()%int(window_size.x), randi()%int(window_size.y))
-					spinner_instance.global_translate(offset)
+				while(spinner_instance.get_node("Spinner_Overlap_Area").get_overlapping_areas().size() > 0 or overcrowded(offset)):
+					offset = Vector2(randi()%int(window_size.x), -randi()%int(window_size.y))
+					spinner_instance.global_position = offset
 						
 				obstacles.push_back(spinner_instance)
 
@@ -93,7 +91,7 @@ func set_level_speed(speed):
 func overcrowded(point):
 	var cnt = 0
 	for obstacle in obstacles:
-		if obstacle.global_position <= (point.y + 300) and obstacle.global_position >= (point.y - 300):
+		if obstacle.global_position.y <= (point.y + 300) and obstacle.global_position.y >= (point.y - 300):
 			cnt  += 1
 	if cnt >= 2:
 		return true

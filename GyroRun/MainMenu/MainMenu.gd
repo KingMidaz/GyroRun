@@ -10,3 +10,8 @@ func _on_StartButton_pressed():
 		global.time_to_next_ad = global.time_between_ads
 	get_tree().change_scene("res://BallRoll.tscn")
 
+func _on_Settings_pressed():
+	get_tree().change_scene("res://Settings.tscn")
+
+func _on_Leaderboard_pressed():
+	get_tree().change_scene("res://Leaderboard.tscn")

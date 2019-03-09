@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://ArtAssets/MainMenu.png" type="Texture" id=1]
+[ext_resource path="res://Leaderboard.gd" type="Script" id=2]
+[ext_resource path="res://ArtAssets/Back_Button.png" type="Texture" id=3]
+[ext_resource path="res://Gobold Bold.ttf" type="DynamicFontData" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 300, 200 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 65
+font_data = ExtResource( 4 )
+
+[node name="Leaderboard" type="Sprite"]
+texture = ExtResource( 1 )
+centered = false
+script = ExtResource( 2 )
+
+[node name="Back_Button" type="TouchScreenButton" parent="."]
+position = Vector2( 50, 50 )
+scale = Vector2( 0.2, 0.2 )
+normal = ExtResource( 3 )
+shape = SubResource( 1 )
+
+[node name="High_Scores" type="RichTextLabel" parent="."]
+margin_left = 100.0
+margin_top = 1048.0
+margin_right = 1052.0
+margin_bottom = 2317.0
+custom_fonts/normal_font = SubResource( 2 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "1. David
+2. David
+3. David
+4. David
+5. David
+6. David
+7. David
+8. David
+9. David
+10. David"
+
+[connection signal="pressed" from="Back_Button" to="." method="_on_Back_Button_pressed"]

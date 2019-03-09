@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-var roll_speed = 80
+var roll_speed = global.ball_speed
 var controls_reversed = false
 
 func _ready():

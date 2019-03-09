@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://ArtAssets/Table.png" type="Texture" id=1]
 [ext_resource path="res://Ball_Level.gd" type="Script" id=2]
@@ -63,6 +63,14 @@ tracks/2/keys = {
 "update": 0,
 "values": [ 0.0, 360.0 ]
 }
+
+[sub_resource type="DynamicFont" id=7]
+size = 48
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 80
+font_data = ExtResource( 6 )
 
 [node name="Table" type="Sprite"]
 texture = ExtResource( 1 )
@@ -146,4 +154,30 @@ rotation = 6.28319
 scale = Vector2( 1e-05, 1e-05 )
 texture = ExtResource( 7 )
 
+[node name="High_Score" type="WindowDialog" parent="."]
+visible = true
+margin_left = 100.0
+margin_top = 250.0
+margin_right = 1024.0
+margin_bottom = 779.0
+window_title = "High Score"
+
+[node name="LineEdit" type="LineEdit" parent="High_Score"]
+margin_left = 180.0
+margin_top = 360.0
+margin_right = 759.0
+margin_bottom = 465.0
+custom_fonts/font = SubResource( 7 )
+
+[node name="Label" type="Label" parent="High_Score"]
+margin_left = 10.883
+margin_top = 63.883
+margin_right = 911.883
+margin_bottom = 311.883
+custom_fonts/font = SubResource( 8 )
+text = "You've Got A New High Score!"
+align = 1
+autowrap = true
+
 [connection signal="round_ended" from="Ball/Ball_Fail" to="." method="_on_round_ended"]
+[connection signal="text_entered" from="High_Score/LineEdit" to="." method="_on_LineEdit_text_entered"]

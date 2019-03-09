@@ -33,8 +33,17 @@ func _process(delta):
 				get_node("Reversed_Notification_Point/Text_AnimationPlayer").play_backwards("2D_Text_Anim")
 
 func _on_round_ended():
+	set_process(false)
 	print("GyroRun: Ending round")
 	if global.ad_to_be_shown:
 		global.firebase.show_interstitial_ad()
 		global.ad_to_be_shown = false
+	if global.load_data["Scores"].size() < 10 or global.score_is_high(global.score):
+		get_node("High_Score").popup()
+	else:
+		get_tree().change_scene("res://MainMenu/MainMenu.tscn")
+
+
+func _on_LineEdit_text_entered(new_text):
+	global.add_high_score(global.score, new_text)
 	get_tree().change_scene("res://MainMenu/MainMenu.tscn")
