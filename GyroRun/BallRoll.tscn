@@ -155,7 +155,6 @@ scale = Vector2( 1e-05, 1e-05 )
 texture = ExtResource( 7 )
 
 [node name="High_Score" type="WindowDialog" parent="."]
-visible = true
 margin_left = 100.0
 margin_top = 250.0
 margin_right = 1024.0

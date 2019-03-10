@@ -23,7 +23,14 @@ func _ready():
 		global.firebase.initWithFile("res://godot-firebase-config.json", get_instance_id())
 
 	if load_data == null:
-		load_data = {"Scores" : []}
+		load_data = {"Scores" : [], "Settings" : 
+			{"Ball" : ball_speed, "Max" : max_obstacles, "Min" : min_obstacles}
+		}
+	else:
+		ball_speed = load_data["Settings"]["Ball"]
+		max_obstacles = load_data["Settings"]["Max"]
+		min_obstacles = load_data["Settings"]["Min"]
+		
 	print("GyroRun: Data loaded " + String(load_data))
 		
 func _process(delta):
